@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">MapDisarm</string>
+    <color name="red">#FF613D</color>
+    <color name="white">#FFFFFF</color>
+    <color name="blue">#023B73</color>
 </resources>

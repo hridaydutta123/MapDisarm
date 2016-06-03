@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="armeabi,armeabi-v7a"
+    abi="armeabi-v7a,armeabi"
     api-level="22"
     density="xhdpi"
     format="7"
-    timestamp="4174806446723" >
+    timestamp="12866300672032" >
 
     <task
         name="javac"
-        duration="62" />
+        duration="148" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="22" />
+        duration="24" />
     <task
         name="verifier"
-        duration="3" />
+        duration="1" />
 
     <artifact
-        location="/home/cse/AndroidStudioProjects/MapDisarm/app/build/outputs/apk/app-debug.apk"
+        location="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/outputs/apk/app-debug.apk"
         type="MAIN" />
 
-    <build timestamp="4174806446723" >
+    <build timestamp="12866300672032" >
         <artifact
-            location="/home/cse/AndroidStudioProjects/MapDisarm/app/build/outputs/apk/app-debug.apk"
+            location="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
     </build>
 
