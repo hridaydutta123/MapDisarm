@@ -26,7 +26,7 @@ public class MyService extends Service {
     private static final int maxRunningDownloads = 5;
 
     private static String sdcard = Environment.getExternalStorageDirectory().toString();
-    private static String syncDirectory = sdcard + "/DMS/Working/";
+    private static String syncDirectory = sdcard + "/DMS/Map/tiles/";
     private static String mapDirectory = sdcard + "/DMS/Map/";
     private static String databaseDirectory = sdcard +  "/DMS/";
     private static String databaseName = "fileDB.txt";
@@ -40,11 +40,13 @@ public class MyService extends Service {
     private final IBinder syncServiceBinder = new SyncServiceBinder();
 
     public MyService() {
+        logger = new Logger(databaseDirectory, PEER_ID);
         discoverer = new Discoverer(BROADCAST_IP,PEER_ID, PORT, logger);
         fileManager = new FileManager(databaseName, databaseDirectory, syncDirectory, mapDirectory, logger);
         fileTransporter = new FileTransporter(syncDirectory, logger);
         controller = new Controller(discoverer, fileManager, fileTransporter, syncInterval, maxRunningDownloads, logger);
         webServer = new WebServer(8080, controller, logger);
+
     }
 
     @Override

@@ -17,6 +17,7 @@ public class WebViewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview);
 
+        // Initialize the Webview
         webView = (WebView) findViewById(R.id.webView1);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());

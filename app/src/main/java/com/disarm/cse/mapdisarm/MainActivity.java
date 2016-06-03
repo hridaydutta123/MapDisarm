@@ -120,6 +120,7 @@ public class MainActivity extends Activity {
         final Button psynctgl = (Button) findViewById(R.id.psynctgl);
         final Button openWebView = (Button) findViewById(R.id.openWebView);
 
+        // Start Syncing Activity
         psynctgl.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                     final Intent syncServiceIntent = new Intent(getBaseContext(), MyService.class);
@@ -130,8 +131,7 @@ public class MainActivity extends Activity {
             }
         });
 
-
-
+        // Start WebView
         openWebView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                Toast.makeText(getApplicationContext(), imagesFolder.toString()+ "/offlineMap/index.html" ,

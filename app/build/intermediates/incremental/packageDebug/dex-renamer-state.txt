@@ -1,4 +1,4 @@
-#Fri Jun 03 15:43:29 IST 2016
+#Fri Jun 03 17:12:36 IST 2016
 base.0=/home/cse/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_dab188b1b22dc60002b10099b4255be709ee95ee
 renamed.1=classes.dex
 renamed.0=classes2.dex
