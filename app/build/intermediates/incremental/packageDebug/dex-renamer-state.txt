@@ -1,0 +1,7 @@
+#Fri Jun 03 15:43:29 IST 2016
+base.0=/home/cse/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_dab188b1b22dc60002b10099b4255be709ee95ee
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/home/cse/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_b20212f719bbf1b450178ce603ad26ddabc28732/classes.dex
+base.1=/home/cse/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_b20212f719bbf1b450178ce603ad26ddabc28732
+file.0=/home/cse/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_dab188b1b22dc60002b10099b4255be709ee95ee/classes.dex
