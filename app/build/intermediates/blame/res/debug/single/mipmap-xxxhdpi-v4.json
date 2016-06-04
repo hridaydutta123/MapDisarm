@@ -6,5 +6,13 @@
     {
         "merged": "/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_launcher.png",
         "source": "/home/hridoy/AndroidStudioProjects/MapDisarm/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/cse/AndroidStudioProjects/MapDisarm/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/bg.jpg",
+        "source": "/home/cse/AndroidStudioProjects/MapDisarm/app/src/main/res/mipmap-xxxhdpi/bg.jpg"
+    },
+    {
+        "merged": "/home/cse/AndroidStudioProjects/MapDisarm/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_launcher.png",
+        "source": "/home/cse/AndroidStudioProjects/MapDisarm/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
     }
 ]

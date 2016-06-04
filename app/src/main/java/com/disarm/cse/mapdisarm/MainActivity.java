@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
@@ -15,7 +16,10 @@ import android.net.Uri;
 import android.os.Environment;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -44,7 +48,6 @@ import static com.disarm.cse.mapdisarm.R.id.time;
 public class MainActivity extends Activity {
     File imagesFolder;
     String fileNameFromCheckbox = "";
-    String calendarDateTime = "";
     int flag = 0;
     Calendar c = Calendar.getInstance();
     MyService myService;
@@ -55,18 +58,42 @@ public class MainActivity extends Activity {
     public static final int AVAILABLE = 2;
     double latitude, longitude;
     LocationManager lm;
+    Context context;
+    Location location;
+    boolean gps_enabled,network_enabled;
+    LocationListener locationListener;
+    CheckBox cb1,cb2,cb3,cb4;
+    Button psynctgl,openWebView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        gps_enabled = false;
+        network_enabled = false;
+
+        try {
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch(Exception ex) {}
+
+        try {
+            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch(Exception ex) {}
+
+        if(!gps_enabled && !network_enabled) {
+            // notify user
+                Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                   startActivity(myIntent);
+
+        }
         setContentView(R.layout.activity_main);
 
         imagesFolder = new File(Environment.getExternalStorageDirectory(), "MapDisarm");
-
         if (!imagesFolder.exists()) {
             imagesFolder.mkdirs();
         }
-
-        LocationListener locationListener = new MyLocationListener();
+        locationListener = new MyLocationListener();
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -80,18 +107,23 @@ public class MainActivity extends Activity {
             return;
         }
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 1, locationListener);
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        longitude = location.getLongitude();
-        latitude = location.getLatitude();
-        Toast.makeText(getApplicationContext(), "Lat:" + latitude + "Long:" + longitude,
-                Toast.LENGTH_LONG).show();
+
+        if (lm != null) {
+            location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if (location != null) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+            }
+            Toast.makeText(getApplicationContext(), "Lat:" + latitude + "Long:" + longitude,
+                    Toast.LENGTH_LONG).show();
+        }
         final Button button = (Button) findViewById(R.id.capture_image);
         button.setBackgroundColor(Color.GRAY);
         button.setEnabled(false);
-        final CheckBox cb1 = (CheckBox)findViewById(R.id.Food);
-        final CheckBox cb2 = (CheckBox)findViewById(R.id.Shelter);
-        final CheckBox cb3 = (CheckBox)findViewById(R.id.Victim);
-        final CheckBox cb4 = (CheckBox)findViewById(R.id.Health);
+        cb1 = (CheckBox)findViewById(R.id.Food);
+        cb2 = (CheckBox)findViewById(R.id.Shelter);
+        cb3 = (CheckBox)findViewById(R.id.Victim);
+        cb4 = (CheckBox)findViewById(R.id.Health);
 
 
         CompoundButton.OnCheckedChangeListener checker = new CompoundButton.OnCheckedChangeListener(){
@@ -154,8 +186,8 @@ public class MainActivity extends Activity {
             }
         });
 
-        final Button psynctgl = (Button) findViewById(R.id.psynctgl);
-        final Button openWebView = (Button) findViewById(R.id.openWebView);
+        psynctgl = (Button) findViewById(R.id.psynctgl);
+        openWebView = (Button) findViewById(R.id.openWebView);
 
         psynctgl.setBackgroundColor(Color.WHITE);
         openWebView.setBackgroundColor(Color.CYAN);
@@ -189,14 +221,19 @@ public class MainActivity extends Activity {
     }
     private final class MyLocationListener implements LocationListener {
 
+
         @Override
         public void onLocationChanged(Location locFromGps) {
             // called when the listener is notified with a location update from the GPS
             Toast.makeText(getApplicationContext(), "On location Changed", Toast.LENGTH_LONG).show();
             Toast.makeText(getApplicationContext(), "Lat:" + latitude + "Long:" + longitude,
                     Toast.LENGTH_LONG).show();
-            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            longitude = location.getLongitude();
+            try {
+                location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            } catch (SecurityException e) {
+                Toast.makeText(getApplicationContext(), "Problem with GPS", Toast.LENGTH_LONG).show();
+            }
+           longitude = location.getLongitude();
             latitude = location.getLatitude();
         }
 
@@ -247,6 +284,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy(){
         final Intent syncServiceIntent = new Intent(getBaseContext(), MyService.class);
+        
         stopService(syncServiceIntent);
         unbindService(syncServiceConnection);
         super.onDestroy();

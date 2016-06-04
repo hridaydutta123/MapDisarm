@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">MapDisarm</string>
+    <string name="gps_network_not_enabled">GPS Not Enabled</string>
+    <string name="open_location_settings">Open Location Settings</string>
+    <string name="Cancel">Cancel</string>
     <color name="red">#FF613D</color>
     <color name="white">#FFFFFF</color>
     <color name="blue">#023B73</color>
