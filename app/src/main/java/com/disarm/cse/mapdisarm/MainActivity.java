@@ -22,6 +22,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -34,6 +35,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.sanna.cse.disarmlibrary.MyService;
+
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -45,14 +48,16 @@ import bishakh.psync.SyncService;
 import static com.disarm.cse.mapdisarm.R.id.time;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity{
+    private static final int MY_PERMISSIONS_REQUEST = 1;
     File imagesFolder;
     String fileNameFromCheckbox = "";
     int flag = 0;
     Calendar c = Calendar.getInstance();
-    MyService myService;
+    MapService myService;
     boolean syncServiceBound = false;
     int boolWebViewFlag = 1;
+    float speed;
     public static final int OUT_OF_SERVICE = 0;
     public static final int TEMPORARILY_UNAVAILABLE = 1;
     public static final int AVAILABLE = 2;
@@ -60,14 +65,58 @@ public class MainActivity extends Activity {
     LocationManager lm;
     Context context;
     Location location;
-    boolean gps_enabled,network_enabled;
+    boolean gps_enabled, network_enabled;
     LocationListener locationListener;
-    CheckBox cb1,cb2,cb3,cb4;
-    Button psynctgl,openWebView;
+    CheckBox cb1, cb2, cb3, cb4;
+    Button psynctgl, openWebView;
+    ContextCompat cc = new ContextCompat();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION) &&
+                    ActivityCompat.shouldShowRequestPermissionRationale(this,
+                            Manifest.permission.ACCESS_FINE_LOCATION) &&
+                    ActivityCompat.shouldShowRequestPermissionRationale(this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
+        //checkForProvider();
+        //locationCheck();
+       /*LocationListener locationListenernew = new MyLocationListener();
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenernew);
+        lm.requestLocationUpdates(LocationListener.NET,1000,1,locationListenernew);
+        */
 
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         gps_enabled = false;
@@ -75,26 +124,20 @@ public class MainActivity extends Activity {
 
         try {
             gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        } catch(Exception ex) {}
+        } catch (Exception ex) {
+        }
 
         try {
             network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        } catch(Exception ex) {}
+        } catch (Exception ex) {
+        }
 
-        if(!gps_enabled && !network_enabled) {
+        if (!gps_enabled && !network_enabled) {
             // notify user
-                Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                   startActivity(myIntent);
-
+            Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(myIntent);
         }
-        setContentView(R.layout.activity_main);
 
-        imagesFolder = new File(Environment.getExternalStorageDirectory(), "MapDisarm");
-        if (!imagesFolder.exists()) {
-            imagesFolder.mkdirs();
-        }
-        locationListener = new MyLocationListener();
-        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -106,35 +149,41 @@ public class MainActivity extends Activity {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 1, locationListener);
+        locationListener = new MyLocationListener();
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000,4 , locationListener);
+        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10000,4,locationListener);
 
         if (lm != null) {
             location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             if (location != null) {
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
+                Toast.makeText(getApplicationContext(), "Lat0:" + latitude + "Long0:" + longitude,
+                        Toast.LENGTH_LONG).show();
             }
             Toast.makeText(getApplicationContext(), "Lat:" + latitude + "Long:" + longitude,
                     Toast.LENGTH_LONG).show();
+
         }
+
         final Button button = (Button) findViewById(R.id.capture_image);
         button.setBackgroundColor(Color.GRAY);
         button.setEnabled(false);
-        cb1 = (CheckBox)findViewById(R.id.Food);
-        cb2 = (CheckBox)findViewById(R.id.Shelter);
-        cb3 = (CheckBox)findViewById(R.id.Victim);
-        cb4 = (CheckBox)findViewById(R.id.Health);
+        cb1 = (CheckBox) findViewById(R.id.Food);
+        cb2 = (CheckBox) findViewById(R.id.Shelter);
+        cb3 = (CheckBox) findViewById(R.id.Victim);
+        cb4 = (CheckBox) findViewById(R.id.Health);
 
 
-        CompoundButton.OnCheckedChangeListener checker = new CompoundButton.OnCheckedChangeListener(){
+        CompoundButton.OnCheckedChangeListener checker = new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton cb, boolean b) {
-                if(cb1.isChecked() || cb2.isChecked() || cb3.isChecked() || cb4.isChecked()){
+                if (cb1.isChecked() || cb2.isChecked() || cb3.isChecked() || cb4.isChecked()) {
                     button.setEnabled(true);
                     button.setBackgroundColor(Color.BLACK);
-                }
-                else if(button.isEnabled()){
+                } else if (button.isEnabled()) {
                     button.setEnabled(false);
                     button.setBackgroundColor(Color.GRAY);
                 }
@@ -149,27 +198,39 @@ public class MainActivity extends Activity {
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(cb1.isChecked()) {
+                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.CAMERA)) {
+
+                    } else {
+                        ActivityCompat.requestPermissions(MainActivity.this,
+                                new String[]{Manifest.permission.CAMERA},
+                                MY_PERMISSIONS_REQUEST);
+                    }
+
+                }
+
+                if (cb1.isChecked()) {
                     if (flag == 0) {
                         fileNameFromCheckbox = fileNameFromCheckbox + "Food";
                         flag = 1;
                     } else
                         fileNameFromCheckbox = fileNameFromCheckbox + '-' + "Food";
                 }
-                if(cb2.isChecked()) {
+                if (cb2.isChecked()) {
                     if (flag == 0) {
                         fileNameFromCheckbox = fileNameFromCheckbox + "Shelter";
                         flag = 1;
                     } else
                         fileNameFromCheckbox = fileNameFromCheckbox + '-' + "Shelter";
                 }
-                if(cb3.isChecked()) {
+                if (cb3.isChecked()) {
                     if (flag == 0) {
                         fileNameFromCheckbox = fileNameFromCheckbox + "Victim";
                         flag = 1;
                     } else
                         fileNameFromCheckbox = fileNameFromCheckbox + '-' + "Victim";
-                }if(cb4.isChecked()) {
+                }
+                if (cb4.isChecked()) {
                     if (flag == 0) {
                         fileNameFromCheckbox = fileNameFromCheckbox + "Health";
                         flag = 1;
@@ -177,11 +238,13 @@ public class MainActivity extends Activity {
                         fileNameFromCheckbox = fileNameFromCheckbox + '-' + "Health";
                 }
                 String time = new SimpleDateFormat("yyyyMMddHHmmss").format(c.getTime());
-                File image = new File(imagesFolder,"IMG_" + fileNameFromCheckbox + '_' + time + ".jpg");
+                imagesFolder = Environment.getExternalStoragePublicDirectory("DMS/Map");
+                File image = new File(imagesFolder, "IMG_" + fileNameFromCheckbox + '_' + time + ".jpg");
                 Uri uriSavedImage = Uri.fromFile(image);
                 Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
                 startActivity(intent);
+
 
             }
         });
@@ -194,47 +257,131 @@ public class MainActivity extends Activity {
         // Start Syncing Activity
         psynctgl.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                    openWebView.setEnabled(true);
-                    final Intent syncServiceIntent = new Intent(getBaseContext(), MyService.class);
-                    bindService(syncServiceIntent, syncServiceConnection, Context.BIND_AUTO_CREATE);
-                    startService(syncServiceIntent);
-                    Toast.makeText(getApplicationContext(), "Starting to Sync", Toast.LENGTH_SHORT).show();
-                    boolWebViewFlag = 0;
+                openWebView.setEnabled(true);
+                final Intent syncServiceIntent = new Intent(getBaseContext(), MapService.class);
+                bindService(syncServiceIntent, syncServiceConnection, Context.BIND_AUTO_CREATE);
+                startService(syncServiceIntent);
+                Toast.makeText(getApplicationContext(), "Starting to Sync", Toast.LENGTH_SHORT).show();
+                boolWebViewFlag = 0;
             }
         });
 
         // Start WebView
         openWebView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(boolWebViewFlag == 1) {
+                if (boolWebViewFlag == 1) {
                     Toast.makeText(getApplicationContext(), "Press Sync Start Button First",
                             Toast.LENGTH_LONG).show();
-                }
-                else {
+                } else {
                     Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
                     startActivity(intent);
                 }
             }
         });
 
+        Button disarmConnect = (Button)findViewById(R.id.dc);
+        disarmConnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startService(new Intent(getBaseContext(), MyService.class));
+            }
+        });
 
     }
-    private final class MyLocationListener implements LocationListener {
+/**
+   public void checkForProvider() {
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        gps_enabled = false;
+        network_enabled = false;
 
+        try {
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch (Exception ex) {
+        }
+
+        try {
+            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch (Exception ex) {
+        }
+
+        if (!gps_enabled && !network_enabled) {
+            // notify user
+            Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(myIntent);
+        }else{
+        locationCheck();}
+
+    }
+
+    public void locationCheck() {
+        Toast.makeText(MainActivity.this, "locationcheck 1", Toast.LENGTH_SHORT).show();
+        if (gps_enabled || network_enabled) {
+
+            Toast.makeText(MainActivity.this, "locationcheck if 2", Toast.LENGTH_SHORT).show();
+
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            locationListener = new MyLocationListener();
+            lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000,1 , locationListener);
+            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,1000,1,locationListener);
+
+            if (lm != null) {
+                location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                if (location != null) {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                    Toast.makeText(getApplicationContext(), "Lat0:" + latitude + "Long0:" + longitude,
+                            Toast.LENGTH_LONG).show();
+                }
+                Toast.makeText(getApplicationContext(), "Lat:" + latitude + "Long:" + longitude,
+                        Toast.LENGTH_LONG).show();
+
+            }
+        }
+        else{
+            Toast.makeText(MainActivity.this, "locatioCheck Else 3", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+*
+**/
+
+
+
+
+
+
+
+    private final class MyLocationListener implements LocationListener {
 
         @Override
         public void onLocationChanged(Location locFromGps) {
             // called when the listener is notified with a location update from the GPS
+            longitude = locFromGps.getLongitude();
+            latitude = locFromGps.getLatitude();
+            speed=locFromGps.getSpeed();
             Toast.makeText(getApplicationContext(), "On location Changed", Toast.LENGTH_LONG).show();
             Toast.makeText(getApplicationContext(), "Lat:" + latitude + "Long:" + longitude,
                     Toast.LENGTH_LONG).show();
+            if (latitude!=0.0 && longitude!=0.0){
+            Logger.addRecordToLog(String.valueOf(latitude)+","+ String.valueOf(longitude)+","+String.valueOf(speed));
+            }
             try {
                 location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             } catch (SecurityException e) {
                 Toast.makeText(getApplicationContext(), "Problem with GPS", Toast.LENGTH_LONG).show();
             }
-           longitude = location.getLongitude();
-            latitude = location.getLatitude();
+
+            Log.v("speed :",Float.toString(speed));
         }
 
         @Override
@@ -261,8 +408,10 @@ public class MainActivity extends Activity {
         @Override
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
-            MyService.SyncServiceBinder binder = (MyService.SyncServiceBinder) service;
+            Toast.makeText(MainActivity.this, "on service 1", Toast.LENGTH_SHORT).show();
+            MapService.SyncServiceBinder binder = (MapService.SyncServiceBinder) service;
             myService = binder.getService();
+            Toast.makeText(MainActivity.this, "on service 2", Toast.LENGTH_SHORT).show();
             syncServiceBound = true;
         }
 
@@ -283,10 +432,33 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onDestroy(){
-        final Intent syncServiceIntent = new Intent(getBaseContext(), MyService.class);
-        
+        final Intent syncServiceIntent = new Intent(getBaseContext(), MapService.class);
+
         stopService(syncServiceIntent);
         unbindService(syncServiceConnection);
         super.onDestroy();
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 }

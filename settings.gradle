@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':disarmlibrary-releasev1.1.1'

@@ -1,18 +1,10 @@
 [
     {
-        "merged": "/home/cse/AndroidStudioProjects/MapDisarm/app/build/intermediates/res/merged/debug/mipmap-hdpi-v4/bg.jpg",
-        "source": "/home/cse/AndroidStudioProjects/MapDisarm/app/src/main/res/mipmap-hdpi/bg.jpg"
+        "merged": "D:\\RAT\\MapDisarm\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi-v4\\bg.jpg",
+        "source": "D:\\RAT\\MapDisarm\\app\\src\\main\\res\\mipmap-hdpi\\bg.jpg"
     },
     {
-        "merged": "/home/cse/AndroidStudioProjects/MapDisarm/app/build/intermediates/res/merged/debug/mipmap-hdpi-v4/ic_launcher.png",
-        "source": "/home/cse/AndroidStudioProjects/MapDisarm/app/src/main/res/mipmap-hdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/res/merged/debug/mipmap-hdpi-v4/ic_launcher.png",
-        "source": "/home/hridoy/AndroidStudioProjects/MapDisarm/app/src/main/res/mipmap-hdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/res/merged/debug/mipmap-hdpi-v4/bg.jpg",
-        "source": "/home/hridoy/AndroidStudioProjects/MapDisarm/app/src/main/res/mipmap-hdpi/bg.jpg"
+        "merged": "D:\\RAT\\MapDisarm\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi-v4\\ic_launcher.png",
+        "source": "D:\\RAT\\MapDisarm\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     }
 ]

@@ -102,10 +102,23 @@
                 android:layout_marginBottom="20dp"
                 />
             <Button
+            android:layout_width="127dp"
+            android:layout_height="wrap_content"
+            android:text="Open WebView"
+            android:id="@+id/openWebView"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.08"
+            android:theme="@style/AppTheme.Button"
+            android:layout_marginBottom="20dp"
+            />
+
+            <Button
                 android:layout_width="127dp"
                 android:layout_height="wrap_content"
-                android:text="Open WebView"
-                android:id="@+id/openWebView"
+                android:text="DisarmConnect"
+                android:id="@+id/dc"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
                 android:layout_gravity="center_horizontal"

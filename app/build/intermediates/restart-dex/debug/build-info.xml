@@ -4,28 +4,28 @@
     api-level="22"
     density="xhdpi"
     format="7"
-    timestamp="12866300672032" >
+    timestamp="43239416206627" >
 
     <task
         name="javac"
-        duration="148" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="24" />
+        duration="0" />
     <task
         name="verifier"
-        duration="1" />
+        duration="0" />
 
     <artifact
-        location="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/outputs/apk/app-debug.apk"
+        location="D:\RAT\MapDisarm\app\build\outputs\apk\app-debug.apk"
         type="MAIN" />
 
-    <build timestamp="12866300672032" >
+    <build timestamp="43239416206627" >
         <artifact
-            location="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/outputs/apk/app-debug.apk"
+            location="D:\RAT\MapDisarm\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
 
