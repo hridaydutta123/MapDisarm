@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:2:1-32:12
+ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:2:1-34:12
 	package
 		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:3:5-39
 		INJECTED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml
@@ -36,8 +36,13 @@ uses-permission#android.permission.CAMERA
 ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:9:5-64
 	android:name
 		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:9:22-62
+uses-permission#android.permission.WRITE_SETTINGS
+ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:10:5-72
+MERGED from [:disarmlibrary-releasev1.1.1:] D:\RAT\MapDisarm\app\build\intermediates\exploded-aar\disarmlibrary-releasev1.1.1\AndroidManifest.xml:20:5-73
+	android:name
+		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:10:22-70
 application
-ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:10:5-30:19
+ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:12:5-32:19
 MERGED from [com.android.support:appcompat-v7:23.4.0] D:\RAT\MapDisarm\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:animated-vector-drawable:23.4.0] D:\RAT\MapDisarm\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\AndroidManifest.xml:7:5-20
 MERGED from [com.android.support:support-vector-drawable:23.4.0] D:\RAT\MapDisarm\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\AndroidManifest.xml:7:5-20
@@ -48,43 +53,43 @@ MERGED from [com.android.support:support-v4:23.4.0] D:\RAT\MapDisarm\app\build\i
 MERGED from [com.android.support.constraint:constraint-layout:1.0.0-alpha1] D:\RAT\MapDisarm\app\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-alpha1\AndroidManifest.xml:9:5-20
 MERGED from [:disarmlibrary-releasev1.1.1:] D:\RAT\MapDisarm\app\build\intermediates\exploded-aar\disarmlibrary-releasev1.1.1\AndroidManifest.xml:22:5-27:19
 	android:label
-		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:13:9-41
+		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:15:9-41
 	android:supportsRtl
-		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:14:9-35
+		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:16:9-35
 	android:allowBackup
-		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:11:9-35
+		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:13:9-35
 	android:icon
-		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:12:9-43
+		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:14:9-43
 	android:theme
-		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:15:9-40
+		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:17:9-40
 activity#com.disarm.cse.mapdisarm.MainActivity
-ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:16:9-22:20
+ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:18:9-24:20
 	android:name
-		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:16:19-47
+		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:18:19-47
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:17:13-21:29
+ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:19:13-23:29
 action#android.intent.action.MAIN
-ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:18:17-69
+ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:20:17-69
 	android:name
-		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:18:25-66
+		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:20:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:20:17-77
+ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:22:17-77
 	android:name
-		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:20:27-74
+		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:22:27-74
 activity#com.disarm.cse.mapdisarm.WebViewActivity
-ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:23:9-25:52
+ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:25:9-27:52
 	android:screenOrientation
-		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:25:13-49
+		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:27:13-49
 	android:name
-		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:24:13-44
+		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:26:13-44
 service#com.disarm.cse.mapdisarm.MapService
-ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:26:9-29:39
+ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:28:9-31:39
 	android:enabled
-		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:28:13-35
+		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:30:13-35
 	android:exported
-		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:29:13-36
+		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:31:13-36
 	android:name
-		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:27:13-39
+		ADDED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml:29:13-39
 uses-sdk
 INJECTED from D:\RAT\MapDisarm\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:appcompat-v7:23.4.0] D:\RAT\MapDisarm\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\AndroidManifest.xml:21:5-23:78
@@ -124,10 +129,6 @@ uses-permission#android.permission.READ_PHONE_STATE
 ADDED from [:disarmlibrary-releasev1.1.1:] D:\RAT\MapDisarm\app\build\intermediates\exploded-aar\disarmlibrary-releasev1.1.1\AndroidManifest.xml:17:5-75
 	android:name
 		ADDED from [:disarmlibrary-releasev1.1.1:] D:\RAT\MapDisarm\app\build\intermediates\exploded-aar\disarmlibrary-releasev1.1.1\AndroidManifest.xml:17:22-72
-uses-permission#android.permission.WRITE_SETTINGS
-ADDED from [:disarmlibrary-releasev1.1.1:] D:\RAT\MapDisarm\app\build\intermediates\exploded-aar\disarmlibrary-releasev1.1.1\AndroidManifest.xml:20:5-73
-	android:name
-		ADDED from [:disarmlibrary-releasev1.1.1:] D:\RAT\MapDisarm\app\build\intermediates\exploded-aar\disarmlibrary-releasev1.1.1\AndroidManifest.xml:20:22-70
 service#com.sanna.cse.disarmlibrary.MyService
 ADDED from [:disarmlibrary-releasev1.1.1:] D:\RAT\MapDisarm\app\build\intermediates\exploded-aar\disarmlibrary-releasev1.1.1\AndroidManifest.xml:26:9-73
 	android:name
