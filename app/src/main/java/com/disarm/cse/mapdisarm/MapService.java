@@ -14,7 +14,6 @@ import bishakh.psync.Discoverer;
 import bishakh.psync.FileManager;
 import bishakh.psync.FileTransporter;
 import bishakh.psync.Logger;
-import bishakh.psync.SyncService;
 import bishakh.psync.WebServer;
 
 
