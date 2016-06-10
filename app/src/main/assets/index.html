@@ -1,0 +1,72 @@
+<!doctype html>
+<!--
+    Tangram: real-time WebGL rendering for OpenStreetMap
+
+    http://github.com/tangrams/tangram
+    http://mapzen.com
+-->
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Simple demo – Tangram</title>
+    <link rel="stylesheet" href="leaflet.css" />
+    <script src="jquery.min.js"></script>
+
+    <style>
+        body {
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+
+    </style>
+  </head>
+
+  <body>
+    <div id="map"></div>
+
+    <!-- leaflet -->
+    <script src="leaflet.js"></script>
+
+    <!-- Main tangram library -->
+    <script src="tangram.min.js"></script>
+
+    <!-- Demo setup -->
+    <script>
+      
+        var map = L.map('map');
+
+        var layer = Tangram.leafletLayer({
+            scene: 'scene.json',
+            attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>'
+        });
+
+        layer.addTo(map);
+
+        map.setView([23.548822, 87.29262], 16);
+
+        $.ajax({
+		    url: 'http://127.0.0.1:8080/getGIS/allLogs.txt',
+		    success: function (data){
+				var lines = data.split("\n");
+				for (i = 0; i < lines.length; i++) { 
+					var eachLine = lines[i].split(',');
+					var marker = L.marker([eachLine[0],eachLine[1]]).addTo(map);
+				}     
+		    }
+		    	
+		});
+
+        //var marker = L.marker(['23.5442722','87.2896397']).addTo(map);
+    </script>
+
+  </body>
+</html>

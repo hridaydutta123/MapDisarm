@@ -1,3 +1,7 @@
-CHANGED,D:\RAT\MapDisarm\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class
-CHANGED,D:\RAT\MapDisarm\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\disarm\cse\mapdisarm\ServiceConnectionBinder$override.class
-CHANGED,D:\RAT\MapDisarm\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\disarm\cse\mapdisarm\ServiceConnectionBinder$1$override.class
+CHANGED,/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/disarm/cse/mapdisarm/MainActivity$override.class
+CHANGED,/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/android/tools/fd/runtime/AppPatchesLoaderImpl.class
+CHANGED,/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/disarm/cse/mapdisarm/MainActivity$3$override.class
+CHANGED,/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/disarm/cse/mapdisarm/MainActivity$6$override.class
+CHANGED,/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/disarm/cse/mapdisarm/MainActivity$4$override.class
+CHANGED,/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/disarm/cse/mapdisarm/MainActivity$5$override.class
+CHANGED,/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/disarm/cse/mapdisarm/MainActivity$2$override.class

@@ -12,27 +12,21 @@ import android.widget.Toast;
  * Created by Sanna on 06-06-2016.
  */
 public class MyLocationListener extends MainActivity implements LocationListener {
+    Logger logger;
+    public MyLocationListener(Logger logger1) {
+        this.logger = logger1;
+    }
     @Override
     public void onLocationChanged(Location locFromGps) {
         // called when the listener is notified with a location update from the GPS
         longitude = locFromGps.getLongitude();
         latitude = locFromGps.getLatitude();
         speed=locFromGps.getSpeed();
-        //Toast.makeText(MainActivity.this, "On location Changed", Toast.LENGTH_LONG).show();
-       // Toast.makeText(getApplicationContext(), "Lat:" + latitude + "Long:" + longitude,
-                //Toast.LENGTH_LONG).show();
-        Log.v("MyLocationlistener","On Location Changed");
-        Log.v("MyLocationlistener","Lat:" + latitude + "Long:" + longitude);
+        Log.v("Locatio Changed","Lat:" + latitude + "Long:" + longitude);
         if (latitude!=0.0 && longitude!=0.0){
-            Logger.addRecordToLog(String.valueOf(latitude)+","+ String.valueOf(longitude)+","+String.valueOf(speed));
+            logger.addRecordToLog(String.valueOf(latitude)+","+ String.valueOf(longitude)+","+String.valueOf(speed));
         }
-        /*try {
-            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        } catch (SecurityException e) {
-            Toast.makeText(getApplicationContext(), "Problem with GPS", Toast.LENGTH_LONG).show();
-        }*/
-
-        Log.v("speed :",Float.toString(speed));
+        Log.v("Speed :",Float.toString(speed));
     }
 
 

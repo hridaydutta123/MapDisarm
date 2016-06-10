@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\RAT\\MapDisarm\\app\\build\\intermediates\\res\\merged\\debug\\values-w820dp-v13\\values-w820dp-v13.xml",
+        "outputFile": "/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/res/merged/debug/values-w820dp-v13/values-w820dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 108
                 },
                 "from": {
-                    "file": "D:\\RAT\\MapDisarm\\app\\src\\main\\res\\values-w820dp\\dimens.xml",
+                    "file": "/home/hridoy/AndroidStudioProjects/MapDisarm/app/src/main/res/values-w820dp/dimens.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
