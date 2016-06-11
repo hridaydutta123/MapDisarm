@@ -134,6 +134,7 @@ public class MainActivity extends Activity {
         // Call logger constructor using phoneVal
         logger = new Logger(phoneVal);
 
+
         // Check for Battery Receiver
         this.registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
@@ -154,7 +155,7 @@ public class MainActivity extends Activity {
             startActivity(myIntent);
         }
 
-        locationListener = new MyLocationListener(logger);
+        locationListener = new MyLocationListener(logger,phoneVal);
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -247,8 +248,8 @@ public class MainActivity extends Activity {
 
                 // Store the image file in the location DMS/Map/
                 String time = new SimpleDateFormat("yyyyMMddHHmmss").format(c.getTime());
-                imagesFolder = Environment.getExternalStoragePublicDirectory("DMS/Map");
-                File image = new File(imagesFolder, "IMG_" + fileNameFromCheckbox + '_' + time + ".jpg");
+                imagesFolder = Environment.getExternalStoragePublicDirectory("DMS/Map/tiles");
+                File image = new File(imagesFolder, "IMG_" + fileNameFromCheckbox + '_' + latitude + longitude + "_" + time + ".jpg");
                 Uri uriSavedImage = Uri.fromFile(image);
 
                 // Open Camera intent

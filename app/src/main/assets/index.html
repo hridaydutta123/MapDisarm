@@ -54,16 +54,76 @@
         map.setView([23.548822, 87.29262], 16);
 
         $.ajax({
-		    url: 'http://127.0.0.1:8080/getGIS/allLogs.txt',
-		    success: function (data){
-				var lines = data.split("\n");
-				for (i = 0; i < lines.length; i++) { 
-					var eachLine = lines[i].split(',');
-					var marker = L.marker([eachLine[0],eachLine[1]]).addTo(map);
-				}     
-		    }
-		    	
-		});
+            url: 'http://127.0.0.1:8080/getGIS/allLogs.txt',
+            success: function (data){
+                var lines = data.split("\n");
+                for (i = 0; i < lines.length; i++) { 
+                    var eachLine = lines[i].split(',');
+                    var marker = L.marker([eachLine[0],eachLine[1]]).addTo(map);
+                }     
+            }
+                
+        });
+
+        var situationalDataTypeColor = {}
+        situationalDataTypeColor['Victim'] = L.icon({
+            iconUrl: 'images/victim.png',
+            
+            iconSize:     [35, 35], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+        situationalDataTypeColor['Health'] = L.icon({
+            iconUrl: 'images/health.png',
+            
+            iconSize:     [35, 35], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+        situationalDataTypeColor['Food'] = L.icon({
+            iconUrl: 'images/food.png',
+            
+            iconSize:     [35, 35], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+        situationalDataTypeColor['Shelter'] = L.icon({
+            iconUrl: 'images/shelter.png',
+            
+            iconSize:     [35, 35], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+        
+
+        $.ajax({
+            url: 'http://127.0.0.1:8080/getGIS/allGIS.txt',
+            success: function (data){
+                var lines = data.split("\n");
+                for (i = 0; i < lines.length; i++) { 
+                    var eachLine = lines[i].split('_');
+                    var situationalDataType = eachLine[1].split('-');
+
+                    for (j = 0; j< situationalDataType.length ; j++)
+                    {
+                        console.log("Situational Data:" +situationalDataType[j]);
+                        var updateLat = parseFloat(eachLine[2]) + (j/50000.0);
+                        var updateLong = parseFloat(eachLine[3]) + (j/50000.0);      
+                        var marker = L.marker([updateLat.toString(),updateLong.toString()],{icon: situationalDataTypeColor[situationalDataType[j]]}).addTo(map);
+                        console.log(parseInt(eachLine[2]) + (j/1000.0) + "," + eachLine[3]);         
+                    }
+                }     
+            }
+                
+        });
 
         //var marker = L.marker(['23.5442722','87.2896397']).addTo(map);
     </script>
