@@ -1,2 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="9bca1ee804f2b20673d92c9a42da8f66e74bb317">
+        <dex dex="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_4decdaf7fab7778f940540aa2f27f4684f110afc/classes.dex" />
+    </item>
+    <item
+        jar="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_2740e545f966c4345650abfcf9936dd9619ca39f/classes.dex" />
+    </item>
+    <item
+        jar="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_247fb089ff52bba5993bd77674f1e056bd3cfeaa/classes.dex" />
+    </item>
+    <item
+        jar="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="976121c23059eff020a2f74f2babdeba89d278ea">
+        <dex dex="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_c31602fd7cc64bd39192ea940b5811e18cb8793e/classes.dex" />
+    </item>
+    <item
+        jar="/home/hridoy/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_1cbf19ba6f7b8d0a215bfdcd302d774786d87ac2/classes.dex" />
+    </item>
+    <item
+        jar="/home/hridoy/AndroidStudioProjects/MapDisarm/app/libs/psyncPC.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="6790150fcd0ff5e05bb7b7e6816ccab3be08e146">
+        <dex dex="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/2/psyncPC_19cbd09264a509b266d05402dfdeab4e337e8dd4/classes.dex" />
+    </item>
+    <item
+        jar="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/exploded-aar/com.android.support.constraint/constraint-layout/1.0.0-alpha1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ea579447f9afb1fbcb28e150e1cd4bfe7f56e75b">
+        <dex dex="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support.constraint-constraint-layout-1.0.0-alpha1_c07a6593780e9cc731b361d23e2030296567a8fd/classes.dex" />
+    </item>
+    <item
+        jar="/home/hridoy/Android/Sdk/extras/android/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.0-alpha1/constraint-layout-solver-1.0.0-alpha1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="78d61c347aa5002119e3c17bffcbebf28fe07b0b">
+        <dex dex="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/constraint-layout-solver-1.0.0-alpha1_7f9621189bc3121c5edb9cbaf586b3bbcc2707fc/classes.dex" />
+    </item>
+    <item
+        jar="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_8597166159b29e5f65c985133b4e2b9b1e926451/classes.dex" />
+    </item>
+    <item
+        jar="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_2679e69a3f574af36e42d01a83328b16f7496e76/classes.dex" />
+    </item>
+    <item
+        jar="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_af931fe850b0f7b766ccaa9a9571354a86a72464/classes.dex" />
+    </item>
+    <item
+        jar="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/exploded-aar/disarmlibrary-releasev1.1.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="f426e04da2e2e41d5a8ffe306bc7f49f61df1fc6">
+        <dex dex="/home/hridoy/AndroidStudioProjects/MapDisarm/app/build/intermediates/transforms/dex/debug/folders/1000/10/intermediates-exploded-aar-disarmlibrary-releasev1.1.1_c8fa6b53106ed48b6aaa5562125866e093a08281/classes.dex" />
+    </item>
+
+</items>

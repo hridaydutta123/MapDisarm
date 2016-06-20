@@ -48,6 +48,7 @@ public class Logger {
 
         // Log File Updated with every new entry for onLocationChanged()
         File dir = Environment.getExternalStoragePublicDirectory("DMS/Map/tiles");
+        Log.v("Logger Initiated","");
         if (Environment.MEDIA_MOUNTED.equals(state)) {
             if(!dir.exists()) {
                 Log.d("Dir created ", "Dir created ");
@@ -56,7 +57,7 @@ public class Logger {
             File[] foundFiles = dir.listFiles(new FilenameFilter() {
                 public boolean accept(File dir, String name) {
 
-                    return name.startsWith("MapDisarm_Log");
+                    return name.startsWith("MapDisarm_Log_" + phoneID);
                 }
             });
 

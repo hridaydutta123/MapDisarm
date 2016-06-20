@@ -390,7 +390,7 @@ sources:
         url: tiles/{z}-{x}-{y}.topojson
         #url: '//vector.dev.mapzen.com/osm/all/{z}/{x}/{y}.topojson'
         #url:  //localhost:8080/osm/all/{z}/{x}/{y}.json
-        max_zoom: 16
+        max_zoom: 20
 
     # # Only enable this for local debug, should not be enabled for prod (app inserts these at runtime)
     # #These are all in San Francisco, California

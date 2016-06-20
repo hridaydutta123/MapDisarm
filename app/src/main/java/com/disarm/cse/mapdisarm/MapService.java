@@ -6,7 +6,10 @@ import android.os.Binder;
 import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import bishakh.psync.Controller;
@@ -18,7 +21,7 @@ import bishakh.psync.WebServer;
 
 
 public class MapService extends Service {
-    private static final String PEER_ID = "yyy";
+    private static String PEER_ID = "yyy";
     private static final String BROADCAST_IP = "192.168.43.255";
     private static final int PORT = 4446;
     private static final int syncInterval = 5;
@@ -39,6 +42,21 @@ public class MapService extends Service {
     private final IBinder syncServiceBinder = new SyncServiceBinder();
 
     public MapService() {
+        File file = new File(mapDirectory,"ConfigFile.txt");
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(file);
+            byte[] data = new byte[(int) file.length()];
+            fis.read(data);
+            fis.close();
+
+            PEER_ID = new String(data, "UTF-8");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         logger = new Logger(databaseDirectory, PEER_ID);
         discoverer = new Discoverer(BROADCAST_IP,PEER_ID, PORT, logger);
         fileManager = new FileManager(databaseName, databaseDirectory, syncDirectory, mapDirectory, logger);

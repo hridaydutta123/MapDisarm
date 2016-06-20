@@ -25,6 +25,7 @@ public class WebViewActivity extends Activity {
         // Initialize the Webview
         webView = (WebView) findViewById(R.id.webView1);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("http://127.0.0.1:8080/getMapAsset/index.html");
        // webView.loadUrl("http://mapzen.github.io/hoverboard/#16/35.6841/139.7546");

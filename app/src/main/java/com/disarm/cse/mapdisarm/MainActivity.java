@@ -24,6 +24,7 @@ import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -51,7 +52,7 @@ public class MainActivity extends Activity {
     File imagesFolder,dir;
     String fileNameFromCheckbox = "";
     int flag = 0;
-    Calendar c = Calendar.getInstance();
+
     int boolWebViewFlag = 1;
     float speed;
     double latitude, longitude;
@@ -83,6 +84,11 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Set WakeLock
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        WakeLockHelper.keepCpuAwake(getApplicationContext(), true);
+
 
         dir = Environment.getExternalStoragePublicDirectory("DMS/Map/");
         if (!dir.exists()) {
@@ -167,8 +173,8 @@ public class MainActivity extends Activity {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 1, locationListener);
-        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10000,1,locationListener);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 1, locationListener);
+        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,3000,1,locationListener);
 
         if (lm != null) {
             // Check for lastKnownLocation
@@ -181,7 +187,6 @@ public class MainActivity extends Activity {
 
             }
         }
-
 
         CompoundButton.OnCheckedChangeListener checker = new CompoundButton.OnCheckedChangeListener() {
 
@@ -217,12 +222,17 @@ public class MainActivity extends Activity {
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
+
+                // Open Camera intent
+                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
                 if (cb1.isChecked()) {
                     if (flag == 0) {
                         fileNameFromCheckbox = fileNameFromCheckbox + "Food";
                         flag = 1;
                     } else
                         fileNameFromCheckbox = fileNameFromCheckbox + '-' + "Food";
+
+                    cb1.toggle();
                 }
                 if (cb2.isChecked()) {
                     if (flag == 0) {
@@ -230,6 +240,8 @@ public class MainActivity extends Activity {
                         flag = 1;
                     } else
                         fileNameFromCheckbox = fileNameFromCheckbox + '-' + "Shelter";
+
+                    cb2.toggle();
                 }
                 if (cb3.isChecked()) {
                     if (flag == 0) {
@@ -237,6 +249,8 @@ public class MainActivity extends Activity {
                         flag = 1;
                     } else
                         fileNameFromCheckbox = fileNameFromCheckbox + '-' + "Victim";
+
+                    cb3.toggle();
                 }
                 if (cb4.isChecked()) {
                     if (flag == 0) {
@@ -244,18 +258,20 @@ public class MainActivity extends Activity {
                         flag = 1;
                     } else
                         fileNameFromCheckbox = fileNameFromCheckbox + '-' + "Health";
+                    cb4.toggle();
                 }
-
+                Calendar c = Calendar.getInstance();
                 // Store the image file in the location DMS/Map/
                 String time = new SimpleDateFormat("yyyyMMddHHmmss").format(c.getTime());
                 imagesFolder = Environment.getExternalStoragePublicDirectory("DMS/Map/tiles");
-                File image = new File(imagesFolder, "IMG_" + fileNameFromCheckbox + '_' + latitude + longitude + "_" + time + ".jpg");
+                File image = new File(imagesFolder, "IMG_" + fileNameFromCheckbox + '_' + latitude + "_" +longitude + "_" + time + ".jpg");
                 Uri uriSavedImage = Uri.fromFile(image);
 
-                // Open Camera intent
-                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
                 startActivity(intent);
+                Log.v("Camera Save:",imagesFolder.toString());
+                fileNameFromCheckbox = "";
+                flag = 0;
             }
         });
 
@@ -402,6 +418,7 @@ public class MainActivity extends Activity {
             unbindService(sc.syncServiceConnection);
             stopService(new Intent(getBaseContext(), MyService.class));
         }
+        WakeLockHelper.keepCpuAwake(getApplicationContext(), false);
         super.onDestroy();
 
     }
